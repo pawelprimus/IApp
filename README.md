@@ -1,4 +1,5 @@
 # IApp
+<img src="https://github.com/pawelprimus/IApp/assets/25940088/8fd07e48-fce0-44b0-9f84-f4ac99c2d984" width="100">
 
 ## Description
 
@@ -47,14 +48,14 @@ https://100commitow.pl/
 ---
 ## Technologies
 ### - Backend
-- **Java 21** 
-- **Spring Boot**
-- **Hibernate**
+- **Java 21** <img src="https://user-images.githubusercontent.com/25181517/117201156-9a724800-adec-11eb-9a9d-3cd0f67da4bc.png" width="25">
+- **Spring Boot** <img src="https://user-images.githubusercontent.com/25181517/183891303-41f257f8-6b3d-487c-aa56-c497b880d0fb.png" width="25">
+- **Hibernate** <img src="https://user-images.githubusercontent.com/25181517/117207493-49665200-adf4-11eb-808e-a9c0fcc2a0a0.png" width="25">
 
 ### - Fronted 
-- **Java script**
-- **React**
-- **Material UI**
+- **Java script** <img src="https://user-images.githubusercontent.com/25181517/117447155-6a868a00-af3d-11eb-9cfe-245df15c9f3f.png" width="25">
+- **React** <img src="https://user-images.githubusercontent.com/25181517/183897015-94a058a6-b86e-4e42-a37f-bf92061753e5.png" width="25">
+- **Material UI** <img src="https://user-images.githubusercontent.com/25181517/189716630-fe6c084c-6c66-43af-aa49-64c8aea4a5c2.png" width="25">
 
 ---
 ## Configuration & Installation
