@@ -38,3 +38,4 @@ out/
 
 # Properties
 src/main/resources/*.properties
+backend/IApp/src/main/resources/*.properties
