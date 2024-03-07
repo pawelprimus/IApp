@@ -1,4 +1,4 @@
-package pl.prim.iapp.controller;
+package pl.prim.iapp.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -6,13 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.prim.iapp.model.HelloWorld;
-import pl.prim.iapp.model.User;
-import pl.prim.iapp.model.dto.CreateUserDto;
-import pl.prim.iapp.service.HelloWorldService;
-import pl.prim.iapp.service.UserService;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/helloworld")
@@ -22,9 +15,8 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/create")
-    ResponseEntity<?> create(CreateUserDto createUserDto) {
-        User user = userService.createUser(createUserDto);
-
+    ResponseEntity<?> create(NewUser newUser) {
+        User user = userService.createUser(newUser);
         return ResponseEntity.ok(user);
     }
 
@@ -35,5 +27,23 @@ public class UserController {
         User user = userService.findByUserName(userName);
         return ResponseEntity.ok(user);
     }
+
+    @GetMapping(value = "/getAll", produces = "application/json")
+    public ResponseEntity<?> getAll() {
+        return ResponseEntity.ok(userService.findAll());
+    }
+
+    @GetMapping(value = "/delete", produces = "application/json")
+    public ResponseEntity<?> delete(Long id) {
+        userService.deleteById(id);
+        return ResponseEntity.ok("User deleted");
+    }
+
+    @GetMapping(value = "/getById", produces = "application/json")
+    public ResponseEntity<?> getById(Long id) {
+        return ResponseEntity.ok(userService.findById(id));
+    }
+
+
 
 }
