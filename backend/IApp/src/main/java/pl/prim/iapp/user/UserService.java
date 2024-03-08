@@ -16,7 +16,7 @@ public class UserService {
     }
 
 
-    @Transactional
+
     public User createUser(NewUser newUser) {
         checkIfUserExists(newUser.userName());
 
