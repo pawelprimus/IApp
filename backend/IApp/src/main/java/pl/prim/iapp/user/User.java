@@ -2,8 +2,6 @@ package pl.prim.iapp.user;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import pl.prim.iapp.common.BaseEntity;
 
@@ -11,7 +9,7 @@ import javax.validation.constraints.NotEmpty;
 
 @Entity
 @NoArgsConstructor
-class User extends BaseEntity {
+public class User extends BaseEntity {
 
 
     @Column(nullable = false, unique = true)

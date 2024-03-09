@@ -42,6 +42,9 @@ dependencies {
 // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '3.2.3'
 
+    implementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '3.0.1'
+    implementation group: 'jakarta.persistence', name: 'jakarta.persistence-api', version: '3.0.0'
+
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'

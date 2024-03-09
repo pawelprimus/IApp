@@ -1,6 +1,7 @@
 package pl.prim.iapp.user;
 
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -59,5 +60,14 @@ class UserService {
         }
     }
 
-
+    @PostConstruct
+    public void init() {
+        try {
+            userRepository.save(new User("user1", passwordEncoder.encode("password")));
+            userRepository.save(new User("user2", passwordEncoder.encode("password")));
+            userRepository.save(new User("user3", passwordEncoder.encode("password")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
