@@ -1,51 +1,63 @@
 package pl.prim.iapp.user;
 
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-public class UserService {
+class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository) {
+    UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
-
-    public User createUser(NewUser newUser) {
+    public User createUser(NewUserDto newUser) {
         checkIfUserExists(newUser.userName());
+        User user = newUser.toUser(passwordEncoder.encode(newUser.password()));
 
-        return userRepository.save(newUser.toUser());
+        return userRepository.save(user);
     }
 
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public List<UserDto> findAll() {
+        return userRepository.findAll().stream().map(User::toDto).toList();
     }
 
-    public User findById(Long id) {
-        return userRepository.findById(id).orElse(null);
+    public UserDto findById(Long id) {
+        return userRepository.findById(id)
+                .map(User::toDto)
+                .orElseThrow(() -> new RuntimeException("User not found!"));
     }
 
-    public User findByUserName(String userName) {
-        return userRepository.findByUserName(userName);
+    public UserDto findByUserName(String userName) {
+        return userRepository.findByUserName(userName).map(User::toDto)
+                .orElseThrow(() -> new RuntimeException("User not found!"));
     }
 
     public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
 
-    private void checkIfUserExists(String userName) {
-        if (userRepository.findByUserName(userName) != null) {
-            throw new RuntimeException("User already exists");
-        }
+    public User updateUser(Long userId, UpdateUserDto updateUserDto) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found!"));
+
+        user.update(passwordEncoder.encode(updateUserDto.password()));
+
+        return userRepository.save(user);
     }
 
 
+    private void checkIfUserExists(String userName) {
+        if (userRepository.findByUserName(userName).isPresent()) {
+            throw new RuntimeException("User with give username already exists!");
+        }
+    }
 
 
 }
