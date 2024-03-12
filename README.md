@@ -3,6 +3,7 @@
 
 ## Description
 
+
 IApp is an web application designed to transform the way users manage and interpret their fitness data. This application combines the power of Java and Spring Boot for back-end development with the flexibility of JavaScript and React for the front-end, creating a user-friendly platform for fitness tracking. With functionalities ranging from manual entries for weight measurements and activities to advanced features like weekly average calculations, Excel data import/export, and external API integrations (e.g., Xiaomi), FitData Tracker caters to a broad spectrum of fitness tracking needs. It offers essential tools such as a BMI calculator and caloric/macronutrient calculators for comprehensive health management.
 
 ---
