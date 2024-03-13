@@ -2,10 +2,10 @@ package pl.prim.iapp.user;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.NoArgsConstructor;
 import pl.prim.iapp.common.BaseEntity;
 
-import javax.validation.constraints.NotEmpty;
 
 @Entity
 @NoArgsConstructor
@@ -61,7 +61,7 @@ record NewUserDto(
 }
 
 record UpdateUserDto(
-        @NotEmpty(message = "Password must not be empty")
+        //@NotEmpty(message = "Password must not be empty")
         //@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,20}$", message = "Password must be 8-20 characters long and include at least one lowercase letter, one uppercase letter, and one number")
         String password
 ) {}

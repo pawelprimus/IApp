@@ -12,7 +12,7 @@ public class BaseEntity {
     @GeneratedValue
     @Id
     protected Long id;
- 
+
     @Version
     private Integer version;
 
@@ -24,5 +24,5 @@ public class BaseEntity {
     public Long getId() {
         return id;
     }
- 
+
 }

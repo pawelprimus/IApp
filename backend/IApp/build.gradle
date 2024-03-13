@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.2.3'
+    id 'org.springframework.boot' version '3.1.5'
     id 'io.spring.dependency-management' version '1.1.4'
 }
 
@@ -22,28 +22,24 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '3.2.3'
 
     // https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
     implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.3.0'
+    // https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui
+    //implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.7.0'
+
     // https://mvnrepository.com/artifact/mysql/mysql-connector-java
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.33'
-    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '3.2.3'
     // https://mvnrepository.com/artifact/org.jetbrains/annotations
     implementation group: 'org.jetbrains', name: 'annotations', version: '24.1.0'
     // https://mvnrepository.com/artifact/com.google.guava/guava
     implementation group: 'com.google.guava', name: 'guava', version: '33.0.0-jre'
-    // https://mvnrepository.com/artifact/javax.validation/validation-api
-    implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
-    // https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api
-    implementation group: 'javax.persistence', name: 'javax.persistence-api', version: '2.2'
-// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '3.2.3'
 
-//    implementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '3.0.1'
-//    implementation group: 'jakarta.persistence', name: 'jakarta.persistence-api', version: '3.0.0'
 
 
     compileOnly 'org.projectlombok:lombok'
