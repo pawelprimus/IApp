@@ -16,7 +16,7 @@ https://100commitow.pl/
 ## Features
 [MH] - Must have
 [NTH] = Nice to have
-
+ 
 ### User account
 - [ ] Secure login to the app through user authentication.  [MH]
 
