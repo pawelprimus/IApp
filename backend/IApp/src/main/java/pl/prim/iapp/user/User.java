@@ -1,15 +1,23 @@
 package pl.prim.iapp.user;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import pl.prim.iapp.common.BaseEntity;
+
+import java.util.Collection;
+import java.util.List;
 
 
 @Entity
 @NoArgsConstructor
-public class User extends BaseEntity {
+@Data
+@Table(name = "_user")
+public class User extends BaseEntity implements UserDetails {
 
 
     @Column(nullable = false, unique = true)
@@ -17,6 +25,9 @@ public class User extends BaseEntity {
 
     @Column(nullable = false)
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     User(String userName, String password) {
         this.userName = userName;
@@ -38,6 +49,35 @@ public class User extends BaseEntity {
         this.password = password;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    @Override
+    public String getUsername() {
+        return userName;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
 
 record UserDto(Long id, String userName) {

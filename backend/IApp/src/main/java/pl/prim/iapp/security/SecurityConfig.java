@@ -29,43 +29,43 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public InMemoryUserDetailsManager userDetailsService(PasswordEncoder passwordEncoder) {
-        UserDetails user = User.withUsername("user")
-                .password(passwordEncoder.encode("password"))
-                .roles("USER")
-                .build();
-
-        UserDetails admin = User.withUsername("admin")
-                .password(passwordEncoder.encode("admin"))
-                .roles("USER", "ADMIN")
-                .build();
-
-        return new InMemoryUserDetailsManager(user, admin);
-    }
-
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.cors(Customizer.withDefaults());
-        http.csrf(csrf -> csrf.disable());
-        return http.authorizeHttpRequests(request -> request.anyRequest()
-                        .authenticated())
-                .httpBasic(Customizer.withDefaults())
-                .build();
-    }
-
-
-    @Bean
-    CorsFilter corsFilter() {
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.addAllowedOrigin("*");
-        config.addAllowedHeader("*");
-        config.addAllowedMethod("*");
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
-        return new CorsFilter();
-    }
+//    @Bean
+//    public InMemoryUserDetailsManager userDetailsService(PasswordEncoder passwordEncoder) {
+//        UserDetails user = User.withUsername("user")
+//                .password(passwordEncoder.encode("password"))
+//                .roles("USER")
+//                .build();
+//
+//        UserDetails admin = User.withUsername("admin")
+//                .password(passwordEncoder.encode("admin"))
+//                .roles("USER", "ADMIN")
+//                .build();
+//
+//        return new InMemoryUserDetailsManager(user, admin);
+//    }
+//
+//    @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//        http.cors(Customizer.withDefaults());
+//        http.csrf(csrf -> csrf.disable());
+//        return http.authorizeHttpRequests(request -> request.anyRequest()
+//                        .authenticated())
+//                .httpBasic(Customizer.withDefaults())
+//                .build();
+//    }
+//
+//
+//    @Bean
+//    CorsFilter corsFilter() {
+//        CorsConfiguration config = new CorsConfiguration();
+//        config.setAllowCredentials(true);
+//        config.addAllowedOrigin("*");
+//        config.addAllowedHeader("*");
+//        config.addAllowedMethod("*");
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", config);
+//        return new CorsFilter();
+//    }
 
 
 }
