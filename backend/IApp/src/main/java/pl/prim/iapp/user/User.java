@@ -2,6 +2,8 @@ package pl.prim.iapp.user;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,11 +19,13 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Table(name = "_user")
+@Builder
+@AllArgsConstructor
 public class User extends BaseEntity implements UserDetails {
 
 
     @Column(nullable = false, unique = true)
-    private String userName;
+    private String username;
 
     @Column(nullable = false)
     private String password;
@@ -29,13 +33,13 @@ public class User extends BaseEntity implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    User(String userName, String password) {
-        this.userName = userName;
+    User(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 
     UserDto toDto() {
-        return new UserDto(id, userName);
+        return new UserDto(id, username);
     }
 
     User(NewUserDto source, String encodedPassword) {
@@ -56,7 +60,7 @@ public class User extends BaseEntity implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userName;
+        return username;
     }
 
     @Override
@@ -80,10 +84,10 @@ public class User extends BaseEntity implements UserDetails {
     }
 }
 
-record UserDto(Long id, String userName) {
-    UserDto(Long id, String userName) {
+record UserDto(Long id, String username) {
+    UserDto(Long id, String username) {
         this.id = id;
-        this.userName = userName;
+        this.username = username;
     }
 }
 

@@ -1,6 +1,6 @@
 package pl.prim.iapp.user;
 
-enum Role {
+public enum Role {
     USER,
     ADMIN
 }
