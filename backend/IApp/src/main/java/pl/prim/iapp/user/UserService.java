@@ -37,7 +37,7 @@ class UserService {
     }
 
     public UserDto findByUserName(String userName) {
-        return userRepository.findByUserName(userName).map(User::toDto)
+        return userRepository.findByUsername(userName).map(User::toDto)
                 .orElseThrow(() -> new RuntimeException("User not found!"));
     }
 
@@ -55,19 +55,19 @@ class UserService {
 
 
     private void checkIfUserExists(String userName) {
-        if (userRepository.findByUserName(userName).isPresent()) {
+        if (userRepository.findByUsername(userName).isPresent()) {
             throw new RuntimeException("User with give username already exists!");
         }
     }
 
-    @PostConstruct
-    public void init() {
-        try {
-            userRepository.save(new User("user1", passwordEncoder.encode("password")));
-            userRepository.save(new User("user2", passwordEncoder.encode("password")));
-            userRepository.save(new User("user3", passwordEncoder.encode("password")));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    @PostConstruct
+//    public void init() {
+//        try {
+//            userRepository.save(new User("user1", passwordEncoder.encode("password")));
+//            userRepository.save(new User("user2", passwordEncoder.encode("password")));
+//            userRepository.save(new User("user3", passwordEncoder.encode("password")));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

@@ -12,9 +12,9 @@ import pl.prim.iapp.user.Role;
 @NoArgsConstructor
 public class RegisterRequest {
 
-  //private String firstname;
-  //private String lastname;
-  private String username;
-  private String password;
-  private Role role;
+    //private String firstname;
+    //private String lastname;
+    private String username;
+    private String password;
+    private Role role;
 }
