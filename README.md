@@ -18,7 +18,7 @@ https://100commitow.pl/
 [NTH] = Nice to have
  
 ### User account
-- [ ] Secure login to the app through user authentication.  [MH]
+- [x] Secure login to the app through user authentication.  [MH]
 
 ### Weight
 - [ ] Manual entry of weight measurements.  [MH]
