@@ -11,11 +11,11 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
-	@PostMapping("/create")
-	ResponseEntity<?> create(NewUserDto newUser) {
-		User user = userService.createUser(newUser);
-		return ResponseEntity.ok(user);
-	}
+//	@PostMapping("/create")
+//	ResponseEntity<?> create(NewUserDto newUser) {
+//		User user = userService.createUser(newUser);
+//		return ResponseEntity.ok(user);
+//	}
 
 	//@ApiOperation(value = "Hello world value",
 	//            notes = "Hello world notes")

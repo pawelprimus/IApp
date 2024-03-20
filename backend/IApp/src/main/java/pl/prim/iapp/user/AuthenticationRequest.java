@@ -1,4 +1,4 @@
-package pl.prim.iapp.auth;
+package pl.prim.iapp.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

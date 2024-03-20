@@ -1,38 +1,27 @@
-package pl.prim.iapp.auth;
+package pl.prim.iapp.user;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.prim.iapp.security.JwtService;
-import pl.prim.iapp.user.Role;
-import pl.prim.iapp.user.User;
-import pl.prim.iapp.user.UserRepository;
-
-import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
+//TODO All commented code will be used when refresh token will be implemented
 public class AuthenticationService {
-    private final UserRepository repository;
+    private final UserRepository userRepository;
     //private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationResponse register(RegisterRequest request) {
-        var user = User.builder()
-                .username(request.getUsername())
-                .password(passwordEncoder.encode(request.getPassword()))
-                //.role(request.getRole())
-                .role(Role.USER)
-                .build();
-        var savedUser = repository.save(user);
+    public AuthenticationResponse register(NewUserDto newUser) {
+		checkIfUserExists(newUser.username());
+
+		var user = newUser.toUser(passwordEncoder.encode(newUser.password()));
+        var savedUser = userRepository.save(user);
         var jwtToken = jwtService.generateToken(user);
         //var refreshToken = jwtService.generateRefreshToken(user);
         //saveUserToken(savedUser, jwtToken);
@@ -49,7 +38,7 @@ public class AuthenticationService {
                         request.getPassword()
                 )
         );
-        var user = repository.findByUsername(request.getUsername())
+        var user = userRepository.findByUsername(request.getUsername())
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
         //var refreshToken = jwtService.generateRefreshToken(user);
@@ -60,6 +49,12 @@ public class AuthenticationService {
                 //.refreshToken(refreshToken)
                 .build();
     }
+
+	private void checkIfUserExists(String username) {
+		if (userRepository.findByUsername(username).isPresent()) {
+			throw new RuntimeException("User with give username already exists!");
+		}
+	}
 
 //    private void saveUserToken(User user, String jwtToken) {
 //        var token = Token.builder()

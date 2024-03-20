@@ -1,7 +1,5 @@
 package pl.prim.iapp.user;
 
-
-import jakarta.annotation.PostConstruct;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +17,12 @@ class UserService {
     }
 
 
-    public User createUser(NewUserDto newUser) {
-        checkIfUserExists(newUser.userName());
-        User user = newUser.toUser(passwordEncoder.encode(newUser.password()));
-
-        return userRepository.save(user);
-    }
+//    public User createUser(NewUserDto newUser) {
+//        checkIfUserExists(newUser.userName());
+//        User user = newUser.toUser(passwordEncoder.encode(newUser.password()));
+//
+//        return userRepository.save(user);
+//    }
 
     public List<UserDto> findAll() {
         return userRepository.findAll().stream().map(User::toDto).toList();

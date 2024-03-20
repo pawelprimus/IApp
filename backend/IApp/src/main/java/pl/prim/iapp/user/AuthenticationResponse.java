@@ -1,4 +1,4 @@
-package pl.prim.iapp.auth;
+package pl.prim.iapp.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -14,6 +14,7 @@ public class AuthenticationResponse {
 
     @JsonProperty("access_token")
     private String accessToken;
-    @JsonProperty("refresh_token")
-    private String refreshToken;
+	//TODO add refresh token
+//    @JsonProperty("refresh_token")
+//    private String refreshToken;
 }

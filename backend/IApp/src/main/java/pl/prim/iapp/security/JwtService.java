@@ -47,11 +47,11 @@ public class JwtService {
         return buildToken(extraClaims, userDetails, jwtExpiration);
     }
 
-    public String generateRefreshToken(
-            UserDetails userDetails
-    ) {
-        return buildToken(new HashMap<>(), userDetails, refreshExpiration);
-    }
+//    public String generateRefreshToken(
+//            UserDetails userDetails
+//    ) {
+//        return buildToken(new HashMap<>(), userDetails, refreshExpiration);
+//    }
 
     private String buildToken(
             Map<String, Object> extraClaims,

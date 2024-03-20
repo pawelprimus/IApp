@@ -20,7 +20,6 @@ import java.util.List;
 @Data
 @Table(name = "_user")
 @Builder
-@AllArgsConstructor
 public class User extends BaseEntity implements UserDetails {
 
 
@@ -33,9 +32,10 @@ public class User extends BaseEntity implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    User(String username, String password) {
+    User(String username, String password, Role role) {
         this.username = username;
         this.password = password;
+		this.role = role;
     }
 
     UserDto toDto() {
@@ -44,8 +44,9 @@ public class User extends BaseEntity implements UserDetails {
 
     User(NewUserDto source, String encodedPassword) {
         this(
-                source.userName(),
-                encodedPassword
+                source.username(),
+                encodedPassword,
+				source.role()
         );
     }
 
@@ -92,17 +93,19 @@ record UserDto(Long id, String username) {
 }
 
 record NewUserDto(
-        @NotEmpty(message = "Username must not be empty")
+        //@NotEmpty(message = "Username must not be empty")
         //@Pattern(regexp = "^[a-zA-Z0-9_]{3,15}$", message = "Username must be 3-15 characters long and can only contain letters, numbers, and underscores")
-        String userName,
-        @NotEmpty(message = "Password must not be empty")
+        String username,
+        //@NotEmpty(message = "Password must not be empty")
         //@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,20}$", message = "Password must be 8-20 characters long and include at least one lowercase letter, one uppercase letter, and one number")
-        String password
+        String password,
+		Role role
 ) {
     User toUser(String encodedPassword) {
         return new User(this, encodedPassword);
     }
 }
+
 
 record UpdateUserDto(
         //@NotEmpty(message = "Password must not be empty")
