@@ -1,26 +1,33 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Use useNavigate instead of useHistory
 import { Container, Typography, TextField, Button } from '@mui/material';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate(); // Use navigate for redirection
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const loginData = { username: email, password: password };
 
         try {
-            const response = await fetch('http://localhost:8080/api/login', {
+            const response = await fetch('http://localhost:8080/api/v1/auth/authenticate', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Content-Type': 'application/json',
                 },
-                body: new URLSearchParams(loginData),
+                body: JSON.stringify(loginData),
             });
 
             if (response.ok) {
+                const data = await response.json(); // Assuming the token is in the JSON response
                 console.log("Login successful");
-                // Redirect or manage login state as needed
+                console.log(data)
+                console.log("set to local storage token -> " + data.access_token);
+                localStorage.setItem('jwtToken', data.access_token); // Adjust 'data.token' based on your actual response structure
+                //navigate('/api/v1/demo-controller'); // Change to your desired path
+                navigate('/dashboard');
             } else {
                 console.log("Login failed");
                 // Handle login failure
@@ -32,7 +39,7 @@ const Login = () => {
 
     return (
         <Container component="main" maxWidth="xs">
-            <div style={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
+            <div style={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <Typography component="h1" variant="h5">
                     Sign in
                 </Typography>
