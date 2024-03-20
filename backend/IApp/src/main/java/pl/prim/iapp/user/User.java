@@ -10,7 +10,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import pl.prim.iapp.common.BaseEntity;
+import pl.prim.iapp.weight.Weight;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -19,7 +21,6 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Table(name = "_user")
-@Builder
 public class User extends BaseEntity implements UserDetails {
 
 
@@ -28,6 +29,9 @@ public class User extends BaseEntity implements UserDetails {
 
     @Column(nullable = false)
     private String password;
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Weight> weights = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private Role role;
