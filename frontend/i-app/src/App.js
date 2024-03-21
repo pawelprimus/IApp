@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './Login';
-import Dashboard from './Dashboard'; // Make sure this import is correct
+import Dashboard from './Dashboard';
+import Register from './Register';
 import ProtectedRoute from './ProtectedRoute';
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
+                <Route path="/register" element={<Register />} />
                 <Route path="/" element={<Navigate replace to="/login" />} />
                 {/* Handle 404 Not Found */}
                 <Route path="*" element={<div>404 Not Found</div>} />

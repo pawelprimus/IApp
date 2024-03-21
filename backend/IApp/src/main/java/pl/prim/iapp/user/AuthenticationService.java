@@ -5,6 +5,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.prim.iapp.exception.ex.EntityAlreadyExistsEx;
 import pl.prim.iapp.security.JwtService;
 
 @Service
@@ -17,7 +18,7 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationResponse register(NewUserDto newUser) {
+    public AuthenticationResponse register(NewUserDto newUser) throws EntityAlreadyExistsEx {
 		checkIfUserExists(newUser.username());
 
 		var user = newUser.toUser(passwordEncoder.encode(newUser.password()));
@@ -50,9 +51,9 @@ public class AuthenticationService {
                 .build();
     }
 
-	private void checkIfUserExists(String username) {
+	private void checkIfUserExists(String username) throws EntityAlreadyExistsEx {
 		if (userRepository.findByUsername(username).isPresent()) {
-			throw new RuntimeException("User with give username already exists!");
+			throw new EntityAlreadyExistsEx("User with given username already exists!");
 		}
 	}
 

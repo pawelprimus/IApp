@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.prim.iapp.exception.ex.EntityAlreadyExistsEx;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -18,7 +19,7 @@ public class AuthenticationController {
 	@PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<AuthenticationResponse> register(
 			@RequestBody NewUserDto request
-	) {
+	) throws EntityAlreadyExistsEx {
 		return ResponseEntity.ok(service.register(request));
 	}
 

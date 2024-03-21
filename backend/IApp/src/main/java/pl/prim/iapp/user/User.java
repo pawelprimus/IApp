@@ -39,7 +39,7 @@ public class User extends BaseEntity implements UserDetails {
     User(String username, String password, Role role) {
         this.username = username;
         this.password = password;
-		this.role = role;
+		this.role = Role.USER;
     }
 
     UserDto toDto() {

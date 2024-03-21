@@ -2,48 +2,49 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Typography, TextField, Button } from '@mui/material';
 
-const Login = () => {
+const Register = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
+    const handleRegisterSubmit = async (e) => {
         e.preventDefault();
-        const loginData = { username, password };
+        const registerData = { username, password };
 
         try {
-            const response = await fetch('http://localhost:8080/api/v1/auth/authenticate', {
+            const response = await fetch('http://localhost:8080/api/v1/auth/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(loginData),
+                body: JSON.stringify(registerData),
             });
 
             if (response.ok) {
-                const data = await response.json();
-                console.log("Login successful");
-                localStorage.setItem('jwtToken', data.access_token);
-                navigate('/dashboard');
+                console.log("Registration successful");
+                navigate('/login'); // Redirect to login page after successful registration
             } else {
-                console.log("Login failed");
+                const responseData = await response.json();
+                if (response.status === 400 && responseData.error === "User with given username already exists!") {
+                    setErrorMessage(responseData.error);
+                } else {
+                    console.log("Registration failed");
+                    // Handle other registration failures
+                }
             }
         } catch (error) {
-            console.error("Login error:", error);
+            console.error("Registration error:", error);
         }
-    };
-
-    const handleRegisterRedirect = () => {
-        navigate('/register');
     };
 
     return (
         <Container component="main" maxWidth="xs">
             <div style={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <Typography component="h1" variant="h5">
-                    Sign in
+                    Register
                 </Typography>
-                <form style={{ width: '100%', marginTop: 1 }} onSubmit={handleSubmit}>
+                <form style={{ width: '100%', marginTop: 1 }} onSubmit={handleRegisterSubmit}>
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -66,10 +67,15 @@ const Login = () => {
                         label="Password"
                         type="password"
                         id="password"
-                        autoComplete="current-password"
+                        autoComplete="new-password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
+                    {errorMessage && (
+                        <Typography variant="body2" color="error" style={{ marginTop: 8 }}>
+                            {errorMessage}
+                        </Typography>
+                    )}
                     <Button
                         type="submit"
                         fullWidth
@@ -77,15 +83,12 @@ const Login = () => {
                         color="primary"
                         style={{ marginTop: 3, marginBottom: 2 }}
                     >
-                        Sign In
+                        Register
                     </Button>
                 </form>
-                <Button onClick={handleRegisterRedirect} fullWidth variant="outlined" color="primary">
-                    Register
-                </Button>
             </div>
         </Container>
     );
 };
 
-export default Login;
+export default Register;
