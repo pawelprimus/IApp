@@ -1,5 +1,6 @@
 package pl.prim.iapp.weight;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -13,6 +14,7 @@ import pl.prim.iapp.user.User;
 @RequestMapping("/weights")
 class WeightController {
 
+	@Autowired
 	WeightService weightService;
 
 	@PostMapping

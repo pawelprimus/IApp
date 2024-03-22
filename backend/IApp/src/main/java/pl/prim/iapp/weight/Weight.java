@@ -25,10 +25,16 @@ public class Weight extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
+
+	Weight(long measure, LocalDate localDate, User user) {
+		this.measure = new Measure(measure);
+		this.localDate = localDate;
+		this.user = user;
+	}
 }
 
 record WeightDto(
-		Measure measure,
+		long measure,
 		LocalDate localDate
 ) {
 	Weight toWeight(User user) {
