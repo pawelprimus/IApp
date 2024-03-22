@@ -4,6 +4,7 @@ import Login from './Login';
 import Dashboard from './Dashboard';
 import Register from './Register';
 import ProtectedRoute from './ProtectedRoute';
+import MyWeight from './MyWeight';
 function App() {
     return (
         <BrowserRouter>
@@ -14,6 +15,14 @@ function App() {
                     element={
                         <ProtectedRoute>
                             <Dashboard />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/dashboard/myweight"
+                    element={
+                        <ProtectedRoute>
+                            <MyWeight />
                         </ProtectedRoute>
                     }
                 />
