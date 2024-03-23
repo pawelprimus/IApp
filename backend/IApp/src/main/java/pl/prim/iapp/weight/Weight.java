@@ -31,6 +31,10 @@ public class Weight extends BaseEntity {
 		this.localDate = localDate;
 		this.user = user;
 	}
+
+	WeightDto toDto() {
+		return new WeightDto(measure.getValue(), localDate);
+	}
 }
 
 record WeightDto(

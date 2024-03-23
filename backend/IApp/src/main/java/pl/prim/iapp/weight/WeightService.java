@@ -5,6 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.prim.iapp.user.User;
 
+import java.util.Comparator;
+import java.util.List;
+
 @Service
 class WeightService {
 
@@ -19,8 +22,13 @@ class WeightService {
 	}
 
 
-	Weight addWeight(WeightDto weight, User user) {
-		Weight savedWeight = weightRepository.save(weight.toWeight(user));
-		return savedWeight;
+	boolean addWeight(WeightDto weight, User user) {
+		weightRepository.save(weight.toWeight(user));
+		return true;
 	}
+
+	List<WeightDto> getWeights(User user) {
+		return weightRepository.findAllByUser(user).stream().sorted(Comparator.comparing(Weight::getLocalDate)).map(Weight::toDto).toList();
+	}
+
 }

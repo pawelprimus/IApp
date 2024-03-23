@@ -8,19 +8,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 class Measure {
 
-	private double value;
+	private long value;
 
-	public Measure(double value) {
+	public Measure(long value) {
 		this.value = value;
 	}
 
-	public double getValue() {
+	public long getValue() {
 		return value;
-	}
-
-
-	public void setValue(double value) {
-		this.value = value;
 	}
 
 
