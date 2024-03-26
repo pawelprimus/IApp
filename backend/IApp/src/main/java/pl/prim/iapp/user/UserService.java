@@ -59,12 +59,13 @@ class UserService {
         }
     }
 
-    @PostConstruct
-    public void init() {
-        try {
-            userRepository.save(new User("user", passwordEncoder.encode("a"), Role.USER));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    @PostConstruct
+//    public void init() {
+//        try {
+//            userRepository.save(new User("user", passwordEncoder.encode("a"), Role.USER));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+	
 }

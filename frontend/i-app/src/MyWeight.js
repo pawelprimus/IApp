@@ -42,11 +42,9 @@ const MyWeight = () => {
     };
 
     const formatDate = (dateString) => {
-        console.log('date -> ' + dateString);
-        const dateParts = dateString.split('-');
-        console.log('date -> ' + dateParts[2]);
-        return dateParts[2];
-        //return `${dateParts[1]}/${dateParts[2]}/${dateParts[0]}`; // Assuming format mm/dd/yyyy
+        const date = new Date(dateString);
+        console.log(date)
+        return date;
     };
 
     const handleAddWeight = async (weightData) => {
@@ -81,7 +79,7 @@ const MyWeight = () => {
     const columns = [
         { field: 'id', headerName: 'ID', width: 100 },
         { field: 'measure', headerName: 'Measure', width: 150 },
-        { field: 'localDate', headerName: 'Date', width: 200 },
+        { field: 'localDate', headerName: 'Date', width: 500 },
     ];
 
     const rows = weights.map((weight, index) => ({
